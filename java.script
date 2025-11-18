@@ -1,0 +1,18 @@
+// Unit Converter Example (length: meters to kilometers/miles)
+function convertLength() {
+  const value = parseFloat(document.getElementById('lengthInput').value);
+  const unit = document.getElementById('lengthUnit').value;
+  let result = 0;
+
+  switch(unit) {
+    case 'km':
+      result = value / 1000;
+      break;
+    case 'mile':
+      result = value / 1609.344;
+      break;
+    default:
+      result = value;
+  }
+  document.getElementById('lengthResult').textContent = `Result: ${result.toFixed(3)} ${unit}`;
+}

@@ -1,24 +1,570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Utility ToolKit</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Utility & Conversion Tools Suite</title>
+<style>
+/* Global resets */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #222;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+}
+header {
+  background: #302b63;
+  color: white;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+header h1 {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+nav {
+  margin-top: 0.8rem;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 0;
+  margin: 0;
+}
+nav a {
+  text-decoration: none;
+  background: #6c63ff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgb(108 99 255 / 0.5);
+  transition: background 0.3s ease;
+}
+nav a:hover,
+nav a:focus {
+  background: #8f8afc;
+}
+main {
+  max-width: 980px;
+  margin: 2rem auto 4rem;
+  padding: 0 1rem;
+}
+section {
+  background: rgba(255,255,255,0.9);
+  padding: 2rem 2.4rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.12);
+  margin-bottom: 2.5rem;
+  transition: transform 0.3s ease;
+}
+section:hover {
+  transform: translateY(-6px);
+}
+section h2 {
+  margin-top: 0;
+  font-weight: 800;
+  color: #302b63;
+  border-left: 6px solid #6c63ff;
+  padding-left: 12px;
+}
+label {
+  display: block;
+  font-weight: 600;
+  margin: 1.1rem 0 0.4rem 0;
+  user-select: none;
+}
+input[type="number"],
+input[type="text"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  max-width: 480px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.6px solid #bbb;
+  box-shadow: inset 0 2px 6px rgb(0 0 0 / 0.07);
+  transition: border-color 0.3s;
+}
+input[type="number"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #6c63ff;
+  box-shadow: 0 0 6px #babaef;
+}
+textarea {
+  resize: vertical;
+}
+button {
+  margin-top: 1rem;
+  background: #6c63ff;
+  border: none;
+  padding: 0.8rem 2rem;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgb(108 99 255 / 0.5);
+  transition: background 0.3s ease;
+  margin-right: 10px;
+}
+button:hover,
+button:focus {
+  background: #8f8afc;
+}
+.output {
+  margin-top: 1rem;
+  font-weight: 700;
+  white-space: pre-wrap;
+  color: #302b63;
+}
+.palette-container {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.color-tile {
+  width: 90px;
+  height: 90px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  line-height: 90px;
+  user-select: none;
+  cursor: pointer;
+  text-shadow: 0 0 2px #0009;
+  transition: transform 0.2s ease;
+}
+.color-tile:hover {
+  transform: scale(1.1);
+}
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  section {
+    padding: 1.5rem 1.8rem;
+  }
+  input[type="number"],
+  input[type="text"],
+  textarea,
+  select {
+    max-width: 100%;
+  }
+  button {
+    margin-right: 0;
+    margin-top: 0.8rem;
+  }
+}
+</style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#tools">All Tools</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main id="app"></main>
-  <footer>
-    <p>© 2025 Utility ToolKit. Created with JavaScript.</p>
-  </footer>
-  <script src="script.js"></script>
+<header id="top">
+  <h1>Utility & Conversion Tools Suite</h1>
+  <nav aria-label="Primary navigation">
+    <ul>
+      <li><a href="#unit-converter">Unit Converter</a></li>
+      <li><a href="#currency-exchange">Currency Exchange</a></li>
+      <li><a href="#age-calculator">Age Calculator</a></li>
+      <li><a href="#loan-emi">Loan EMI Calculator</a></li>
+      <li><a href="#tip-calculator">Tip Calculator</a></li>
+      <li><a href="#qr-code">QR Code Generator</a></li>
+      <li><a href="#password-checker">Password Strength Checker</a></li>
+      <li><a href="#color-palette">Color Palette Generator</a></li>
+      <li><a href="#text-case">Text Case Converter</a></li>
+      <li><a href="#word-counter">Word Counter</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+<!-- Unit Converter -->
+<section id="unit-converter" aria-label="Unit Converter">
+  <h2>Unit Converter</h2>
+  <label for="unit-value">Value</label>
+  <input type="number" id="unit-value" placeholder="Enter value" />
+  <label for="unit-from">From</label>
+  <select id="unit-from">
+    <optgroup label="Length">
+      <option value="meter">Meter (m)</option>
+      <option value="kilometer">Kilometer (km)</option>
+      <option value="mile">Mile (mi)</option>
+      <option value="foot">Foot (ft)</option>
+    </optgroup>
+    <optgroup label="Weight">
+      <option value="gram">Gram (g)</option>
+      <option value="kilogram">Kilogram (kg)</option>
+      <option value="pound">Pound (lb)</option>
+      <option value="ounce">Ounce (oz)</option>
+    </optgroup>
+    <optgroup label="Temperature">
+      <option value="celsius">Celsius (°C)</option>
+      <option value="fahrenheit">Fahrenheit (°F)</option>
+      <option value="kelvin">Kelvin (K)</option>
+    </optgroup>
+  </select>
+  <label for="unit-to">To</label>
+  <select id="unit-to"></select>
+  <button onclick="convertUnit()">Convert</button>
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div class="output" id="unit-result"></div>
+</section>
+<!-- Currency Exchange -->
+<section id="currency-exchange" aria-label="Currency Exchange Calculator">
+  <h2>Currency Exchange Calculator</h2>
+  <label for="currency-amount">Amount</label>
+  <input type="number" id="currency-amount" placeholder="Enter amount" />
+  <label for="currency-from">From</label>
+  <select id="currency-from">
+    <option value="USD">USD - US Dollar</option>
+    <option value="EUR">EUR - Euro</option>
+    <option value="INR">INR - Indian Rupee</option>
+    <option value="GBP">GBP - British Pound</option>
+    <option value="JPY">JPY - Japanese Yen</option>
+  </select>
+  <label for="currency-to">To</label>
+  <select id="currency-to">
+    <option value="USD">USD - US Dollar</option>
+    <option value="EUR">EUR - Euro</option>
+    <option value="INR">INR - Indian Rupee</option>
+    <option value="GBP">GBP - British Pound</option>
+    <option value="JPY">JPY - Japanese Yen</option>
+  </select>
+  <button onclick="convertCurrency()">Convert</button>
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div class="output" id="currency-result">Loading rates...</div>
+</section>
+<!-- Age Calculator -->
+<section id="age-calculator" aria-label="Age Calculator">
+  <h2>Age Calculator</h2>
+  <label for="dob">Date of Birth</label>
+  <input type="date" id="dob" max="" />
+  <button onclick="calculateAge()">Calculate Age</button>
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div class="output" id="age-result"></div>
+</section>
+<!-- Loan EMI Calculator -->
+<section id="loan-emi" aria-label="Loan EMI Calculator">
+  <h2>Loan EMI Calculator</h2>
+  <label for="loan-amount">Loan Amount</label>
+  <input type="number" id="loan-amount" placeholder="Enter loan amount" min="0" />
+  <label for="loan-interest">Annual Interest Rate (%)</label>
+  <input type="number" step="0.01" id="loan-interest" placeholder="Enter rate e.g 7.5" min="0" />
+  <label for="loan-tenure">Loan Tenure (years)</label>
+  <input type="number" id="loan-tenure" placeholder="Enter tenure in years" min="0" />
+  <button onclick="calculateEMI()">Calculate EMI</button>
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div class="output" id="emi-result"></div>
+</section>
+<!-- Tip Calculator -->
+<section id="tip-calculator" aria-label="Tip Calculator with Bill Splitter">
+  <h2>Tip Calculator with Bill Splitter</h2>
+  <label for="bill-amount">Bill Amount</label>
+  <input type="number" step="0.01" id="bill-amount" placeholder="Total bill amount" min="0" />
+  <label for="tip-percent">Tip Percentage</label>
+  <input type="number" id="tip-percent" placeholder="Tip % like 15" min="0" />
+  <label for="split-count">Split among how many?</label>
+  <input type="number" id="split-count" placeholder="Number of people" min="1" />
+  <button onclick="calculateTip()">Calculate Tip & Split</button>
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div class="output" id="tip-result"></div>
+</section>
+<!-- QR Code Generator -->
+<section id="qr-code" aria-label="QR Code Generator">
+  <h2>QR Code Generator</h2>
+  <label for="qr-text">Enter Text or URL</label>
+  <input type="text" id="qr-text" placeholder="Enter text or URL" />
+  <button onclick="generateQr()">Generate QR Code</button>
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div id="qr-output" style="margin-top: 1rem;"></div>
+</section>
+<!-- Password Strength Checker -->
+<section id="password-checker" aria-label="Password Strength Checker">
+  <h2>Password Strength Checker</h2>
+  <label for="password-input">Enter Password</label>
+  <input type="password" id="password-input" placeholder="Type a password" />
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div class="output" id="password-result"></div>
+</section>
+<!-- Color Palette Generator -->
+<section id="color-palette" aria-label="Color Palette Generator">
+  <h2>Color Palette Generator</h2>
+  <button onclick="generatePalette()">Generate Palette</button>
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div id="palette-container" class="palette-container"></div>
+</section>
+<!-- Text Case Converter -->
+<section id="text-case" aria-label="Text Case Converter">
+  <h2>Text Case Converter</h2>
+  <label for="text-case-input">Enter Text</label>
+  <textarea id="text-case-input" rows="4" placeholder="Type or paste text"></textarea>
+  <div>
+    <button onclick="convertTextCase('upper')">Uppercase</button>
+    <button onclick="convertTextCase('lower')">Lowercase</button>
+    <button onclick="convertTextCase('title')">Title Case</button>
+    <button onclick="scrollToTop()">Back to Top</button>
+  </div>
+  <div class="output" id="text-case-result"></div>
+</section>
+<!-- Word Counter Tool -->
+<section id="word-counter" aria-label="Word Counter Tool">
+  <h2>Word Counter Tool</h2>
+  <label for="word-counter-input">Enter Text</label>
+  <textarea id="word-counter-input" rows="6" placeholder="Type or paste text"></textarea>
+  <button onclick="countWords()">Count Words</button>
+  <button onclick="scrollToTop()">Back to Top</button>
+  <div class="output" id="word-counter-result"></div>
+</section>
+</main>
+<!-- QR Code library, CDN -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+function scrollToTop(){
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function populateUnitTo() {
+  const unitFrom = document.getElementById('unit-from');
+  const unitTo = document.getElementById('unit-to');
+  unitTo.innerHTML = unitFrom.innerHTML;
+}
+populateUnitTo();
+function convertUnit() {
+  const val = parseFloat(document.getElementById('unit-value').value);
+  const from = document.getElementById('unit-from').value;
+  const to = document.getElementById('unit-to').value;
+  if(isNaN(val)) {
+    alert('Enter a valid number');
+    return;
+  }
+  let meters = 0;
+  if(['meter', 'kilometer', 'mile', 'foot'].includes(from)) {
+    switch(from) {
+      case 'meter': meters = val; break;
+      case 'kilometer': meters = val * 1000; break;
+      case 'mile': meters = val * 1609.34; break;
+      case 'foot': meters = val * 0.3048; break;
+    }
+    let result = 0;
+    switch(to) {
+      case 'meter': result = meters; break;
+      case 'kilometer': result = meters / 1000; break;
+      case 'mile': result = meters / 1609.34; break;
+      case 'foot': result = meters / 0.3048; break;
+    }
+    document.getElementById('unit-result').textContent = `${val} ${from} = ${result.toFixed(4)} ${to}`;
+  } else if(['gram', 'kilogram', 'pound', 'ounce'].includes(from)) {
+    let grams = 0;
+    switch(from) {
+      case 'gram': grams = val; break;
+      case 'kilogram': grams = val * 1000; break;
+      case 'pound': grams = val * 453.592; break;
+      case 'ounce': grams = val * 28.3495; break;
+    }
+    let result = 0;
+    switch(to) {
+      case 'gram': result = grams; break;
+      case 'kilogram': result = grams / 1000; break;
+      case 'pound': result = grams / 453.592; break;
+      case 'ounce': result = grams / 28.3495; break;
+    }
+    document.getElementById('unit-result').textContent = `${val} ${from} = ${result.toFixed(4)} ${to}`;
+  } else {
+    const celsiusToFahrenheit = c => (c * 9/5) + 32;
+    const fahrenheitToCelsius = f => (f - 32) * 5/9;
+    const celsiusToKelvin = c => c + 273.15;
+    const kelvinToCelsius = k => k - 273.15;
+    let celsiusValue = 0;
+    switch(from) {
+      case 'celsius': celsiusValue = val; break;
+      case 'fahrenheit': celsiusValue = fahrenheitToCelsius(val); break;
+      case 'kelvin': celsiusValue = kelvinToCelsius(val); break;
+    }
+    let result = 0;
+    switch(to) {
+      case 'celsius': result = celsiusValue; break;
+      case 'fahrenheit': result = celsiusToFahrenheit(celsiusValue); break;
+      case 'kelvin': result = celsiusToKelvin(celsiusValue); break;
+    }
+    document.getElementById('unit-result').textContent = `${val} ${from} = ${result.toFixed(2)} ${to}`;
+  }
+}
+let currencyRates = null;
+const currencyApi = 'https://api.exchangerate-api.com/v4/latest/USD'; 
+async function fetchRates() {
+  try {
+    const res = await fetch(currencyApi);
+    const data = await res.json();
+    currencyRates = data.rates;
+    document.getElementById('currency-result').textContent = 'Rates loaded. Try converting now!';
+  } catch(e) {
+    document.getElementById('currency-result').textContent = 'Failed to load currency rates.';
+  }
+}
+fetchRates();
+function convertCurrency() {
+  if (!currencyRates) {
+    alert('Currency rates are not loaded yet');
+    return;
+  }
+  const amount = parseFloat(document.getElementById('currency-amount').value);
+  const from = document.getElementById('currency-from').value;
+  const to = document.getElementById('currency-to').value;
+  if(isNaN(amount)) {
+    alert('Enter a valid amount');
+    return;
+  }
+  if(!currencyRates[from] || !currencyRates[to]) {
+    alert('Currency not supported');
+    return;
+  }
+  const usdAmount = amount / currencyRates[from];
+  const converted = usdAmount * currencyRates[to];
+  document.getElementById('currency-result').textContent = `${amount} ${from} = ${converted.toFixed(4)} ${to}`;
+}
+function calculateAge() {
+  const dobInput = document.getElementById('dob').value;
+  if (!dobInput) {
+    alert('Select a birth date');
+    return;
+  }
+  const dob = new Date(dobInput);
+  const today = new Date();
+  if(dob > today) {
+    alert('Birth date cannot be in the future.');
+    return;
+  }
+  let years = today.getFullYear() - dob.getFullYear();
+  let months = today.getMonth() - dob.getMonth();
+  let days = today.getDate() - dob.getDate();
+  if(days < 0) {
+    months--;
+    days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+  }
+  if(months < 0) {
+    years--;
+    months += 12;
+  }
+  document.getElementById('age-result').textContent = `Age: ${years} years, ${months} months, and ${days} days`;
+}
+document.getElementById('dob').max = new Date().toISOString().split('T')[0];
+function calculateEMI() {
+  const P = parseFloat(document.getElementById('loan-amount').value);
+  const R = parseFloat(document.getElementById('loan-interest').value);
+  const N = parseFloat(document.getElementById('loan-tenure').value);
+  if(isNaN(P) || P<=0 || isNaN(R) || R < 0 || isNaN(N) || N <=0){
+    alert('Please enter valid positive numbers');
+    return;
+  }
+  const r = R/(12*100);
+  const n = N*12;
+  const emi = (P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+  document.getElementById('emi-result').textContent = `Monthly EMI: ₹${emi.toFixed(2)}`;
+}
+function calculateTip() {
+  const bill = parseFloat(document.getElementById('bill-amount').value);
+  const tipPercent = parseFloat(document.getElementById('tip-percent').value);
+  const split = parseInt(document.getElementById('split-count').value);
+  if(isNaN(bill) || bill < 0 || isNaN(tipPercent) || tipPercent <0 || isNaN(split) || split < 1) {
+    alert('Enter valid positive values');
+    return;
+  }
+  const tipAmount = bill*(tipPercent/100);
+  const total = bill + tipAmount;
+  const perPerson = total / split;
+  document.getElementById('tip-result').textContent = 
+    `Tip Amount: ₹${tipAmount.toFixed(2)}\nTotal Bill: ₹${total.toFixed(2)}\nPer Person: ₹${perPerson.toFixed(2)}`;
+}
+function generateQr() {
+  const input = document.getElementById('qr-text').value.trim();
+  const container = document.getElementById('qr-output');
+  container.innerHTML = '';
+  if(!input) {
+    alert('Enter text or URL');
+    return;
+  }
+  QRCode.toCanvas(input, {width: 180, margin: 2}, function(err, canvas) {
+    if(err) {
+      alert('Failed to generate QR code');
+      return;
+    }
+    container.appendChild(canvas);
+  });
+}
+const passInput = document.getElementById('password-input');
+const passOutput = document.getElementById('password-result');
+passInput.addEventListener('input', () => {
+  const val = passInput.value;
+  let strength = 0;
+  if(val.length >= 8) strength++;
+  if(/[A-Z]/.test(val)) strength++;
+  if(/[a-z]/.test(val)) strength++;
+  if(/[0-9]/.test(val)) strength++;
+  if(/[^A-Za-z0-9]/.test(val)) strength++;
+  const levels = ['Very Weak', 'Weak', 'Moderate', 'Strong', 'Very Strong'];
+  passOutput.textContent = levels[strength-1] || '';
+  const colors = ['#d32f2f','#f57c00','#fbc02d','#388e3c','#2e7d32'];
+  passOutput.style.color = colors[strength-1] || '#555';
+});
+function generatePalette(){
+  const container = document.getElementById('palette-container');
+  container.innerHTML = '';
+  for(let i=0;i<5;i++){
+    const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+    const div = document.createElement('div');
+    div.className = 'color-tile';
+    div.style.backgroundColor = randomColor;
+    div.title = `Click to copy ${randomColor}`;
+    div.textContent = randomColor.toUpperCase();
+    div.onclick = () => {
+      navigator.clipboard.writeText(randomColor).then(() => alert(`${randomColor.toUpperCase()} copied!`));
+    };
+    container.appendChild(div);
+  }
+}
+function convertTextCase(type){
+  const input= document.getElementById('text-case-input').value;
+  if(!input.trim()){
+    alert('Enter text to convert');
+    return;
+  }
+  let result='';
+  switch(type){
+    case 'upper': result=input.toUpperCase(); break;
+    case 'lower': result=input.toLowerCase(); break;
+    case 'title': result=input.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()); break;
+  }
+  document.getElementById('text-case-result').textContent=result;
+}
+function countWords(){
+  const text= document.getElementById('word-counter-input').value.trim();
+  if(!text){
+    alert('Enter text to count');
+    return;
+  }
+  const words= text.match(/\b\w+\b/g) || [];
+  const chars= text.replace(/\s/g,'').length;
+  const readingTime=(words.length/200).toFixed(2);
+  const output= `Words: ${words.length}\nCharacters (no spaces): ${chars}\nEstimated reading time: ${readingTime} minutes`;
+  document.getElementById('word-counter-result').textContent=output;
+}
+</script>
 </body>
 </html>
